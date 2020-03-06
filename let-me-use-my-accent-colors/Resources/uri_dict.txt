@@ -1,0 +1,11 @@
+﻿Alarms&Clock,ms-clock://
+Calculator,calculator://
+Calendar,outlookcal://
+Camera,microsoft.windows.camera://
+GrooveMusic,mswindowsmusic://
+Mail,outlookmail://
+Maps,bingmaps://
+MicrosoftStore,ms-windows-store://
+OneNote,onenote://
+VoiceRecorder,ms-callrecording://
+Weather,bingweather://

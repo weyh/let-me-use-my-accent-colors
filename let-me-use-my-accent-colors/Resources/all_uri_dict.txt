@@ -1,0 +1,42 @@
+﻿3DBuilder,com.microsoft.builder3d://
+ActionCenter,ms-actioncenter://
+Alarms&Clock,ms-clock://
+Calculator,calculator://
+Calendar,outlookcal://
+Camera,microsoft.windows.camera://
+Connect,ms-projection://
+Cortana,ms-cortana://
+MicrosoftWhiteboard,ms-whiteboard-cmd://
+DeviceDiscovery,ms-settings-connectabledevices:devicediscovery//
+FeedbackHub,feedback-hub://
+GetHelp,ms-contact-support://
+GrooveMusic,mswindowsmusic://
+Mail,outlookmail://
+Maps,bingmaps://
+MicrosoftEdge,microsoft-edge://
+MicrosoftStore,ms-windows-store://
+MicrosoftStoreMovies&TVsection,microsoftvideo://
+Mixed RealityCamera,ms-holocamera://
+Mixed RealityPortal,ms-holographicfirstrun://
+Movies&TVFilms&TV,mswindowsvideo://
+Networks,ms-availablenetworks://
+News,bingnews://
+OneNote,onenote://
+Paint3D,ms-paint://
+People,ms-people://
+Photos,ms-photos://
+ProjectDisplay,ms-settings-displays-topology:projection//
+Settings, ms-settings://
+Tips,ms-get-started://
+View3DPreview,com.microsoft.3dviewer://
+VoiceRecorder,ms-callrecording://
+Weather,bingweather://
+WindowsDefenderSecurityCenter,windowsdefender://
+WindowsMixedRealityEnvironments,ms-environment-builder://
+WindowsParentalControls,ms-wpc://
+Xbox,xbox://
+XboxFriendsList,xbox-friendfinder://
+XboxProfilePage,xbox-profile://
+XboxNetworkSettings,xbox-network://
+XboxSettings,xbox-settings://
+XboxOneSmartGlass,smartglass://
