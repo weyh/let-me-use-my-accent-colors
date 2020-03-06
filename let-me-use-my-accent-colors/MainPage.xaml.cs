@@ -56,7 +56,7 @@ namespace let_me_use_my_accent_colors
                 await tile.RequestCreateAsync();
         }
 
-        private async void Browse(object sender, RoutedEventArgs e)
+        /*private async void Browse(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("> Browse_IMG_BTN_Clicked");
 
@@ -72,11 +72,8 @@ namespace let_me_use_my_accent_colors
                 ((TextBox)FindName(((Button)sender).Name.Replace("Button", "TextBox"))).Text = file.Path;
             else
                 Debug.WriteLine("Img error");
-        }
+        }*/
 
-        private void Create(object sender, RoutedEventArgs e)
-        {
-            PinSecondaryTile();
-        }
+        private void Create(object sender, RoutedEventArgs e) => PinSecondaryTile();
     }
 }

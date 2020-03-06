@@ -39,7 +39,7 @@ namespace let_me_use_my_accent_colors
             firstPartyApps = dict.Select(x => new FirstPartyApp(x.Split(',')[0], x.Split(',')[1])).ToList();
         }
 
-        public async static void LoadSavedTiles()
+        /*public async static void LoadSavedTiles()
         {
             try
             {
@@ -63,7 +63,7 @@ namespace let_me_use_my_accent_colors
                 CreationCollisionOption.ReplaceExisting);
 
             _ = FileIO.WriteTextAsync(file, json);
-        }
+        }*/
 
         public async static void SuspendAsync()
         {
