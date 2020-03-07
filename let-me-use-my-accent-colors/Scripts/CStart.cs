@@ -1,12 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Data.Json;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.StartScreen;
@@ -16,21 +11,23 @@ namespace let_me_use_my_accent_colors
     class CStart
     {
         public static List<FirstPartyApp> firstPartyApps;
-        public static List<SecondaryTile> secondaryTiles = new List<SecondaryTile>();
+        //public static List<SecondaryTile> secondaryTiles = new List<SecondaryTile>();
 
-        public async static void Applicion(string s)
+        /// <summary>
+        /// Starts app
+        /// </summary>
+        /// <param name="uriName">The name associated with the uri</param>
+        public async static void Applicion(string uriName)
         {
-            if (firstPartyApps.Contains(s))
-            {
-                await Launcher.LaunchUriAsync(new Uri(firstPartyApps.Find(x => x.name == s).appURI));
-                Windows.UI.Xaml.Application.Current.Exit();
-            }
+            if (firstPartyApps.Contains(uriName))
+                await Launcher.LaunchUriAsync(new Uri(firstPartyApps.Find(x => x.name == uriName).appURI));
             else
-            {
-                Debug.Fail($"FirstPartyAppURIs.ContainsKey({s})");
-            }
+                Debug.Fail($"FirstPartyAppURIs.ContainsKey({uriName})");
         }
 
+        /// <summary>
+        /// Loads uris from uri_dict.txt
+        /// </summary>
         public async static void LoadFirstPartyAppURIs()
         {
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Resources/uri_dict.txt"));

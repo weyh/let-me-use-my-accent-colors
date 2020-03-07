@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace let_me_use_my_accent_colors
@@ -22,6 +12,11 @@ namespace let_me_use_my_accent_colors
     /// </summary>
     sealed partial class App : Application
     {
+        /// <summary>
+        /// Don't exit from the app if it's already running when a tile is clicked
+        /// </summary>
+        public static bool dontExit = false;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -43,8 +38,13 @@ namespace let_me_use_my_accent_colors
         {
             if (e.Arguments.Contains("app="))
             {
-                CStart.SuspendAsync();
+                if (!dontExit)
+                    CStart.SuspendAsync();
+
                 CStart.Applicion(e.Arguments.Replace("app=", ""));
+
+                if(!dontExit)
+                    Windows.UI.Xaml.Application.Current.Exit();
             }
 
             Frame rootFrame = Window.Current.Content as Frame;

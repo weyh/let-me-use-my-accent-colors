@@ -57,4 +57,9 @@
       </uap:VisualElements>
     </Application>
   </Applications>
+  
+  <Capabilities>
+    <uap:Capability Name="removableStorage"/>
+	<rescap:Capability Name="broadFileSystemAccess" />
+   </Capabilities>
 </Package>

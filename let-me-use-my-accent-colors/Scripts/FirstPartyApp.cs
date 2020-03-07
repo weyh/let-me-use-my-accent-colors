@@ -7,25 +7,47 @@ namespace let_me_use_my_accent_colors
         public string name;
         public string appURI;
 
+        #region GetIcons
         public static Uri GetWide310x150(string name, bool useLegacy)
         {
             if (useLegacy)
-                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/w.png");
+                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/l/Wide310x150Logo.scale-100.png");
             else
-                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/wn.png");
+                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/n/Wide310x150Logo.scale-100.png");
         }
 
         public static Uri GetSquare150x150(string name, bool useLegacy)
         {
             if(useLegacy)
-                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/s.png");
+                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/l/Square150x150Logo.scale-100.png");
             else
-                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/sn.png");
+                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/n/Square150x150Logo.scale-100.png");
         }
 
-        public static Uri GetSquare310x310(string name, bool useLegacy) => GetSquare150x150(name, useLegacy);
-        public static Uri GetSquare71x71(string name, bool useLegacy) => GetSquare150x150(name, useLegacy);
-        public static Uri GetSquare44x44(string name, bool useLegacy) => GetSquare150x150(name, useLegacy);
+        public static Uri GetSquare310x310(string name, bool useLegacy)
+        {
+            if (useLegacy)
+                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/l/LargeTile.scale-100.png");
+            else
+                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/n/LargeTile.scale-100.png");
+        }
+
+        public static Uri GetSquare71x71(string name, bool useLegacy)
+        {
+            if (useLegacy)
+                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/l/SmallTile.scale-100.png");
+            else
+                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/n/SmallTile.scale-100.png");
+        }
+
+        public static Uri GetSquare44x44(string name, bool useLegacy)
+        {
+            if (useLegacy)
+                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/l/Square44x44Logo.targetsize-48.png");
+            else
+                return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/n/Square44x44Logo.targetsize-48.png");
+        }
+        #endregion
 
         public FirstPartyApp(string name, string appURI)
         {
