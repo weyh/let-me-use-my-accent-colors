@@ -15,14 +15,14 @@
 
   <Identity
     Name="f0dce247-839b-462d-94ab-74963e55f455"
-    Publisher="CN=bakge"
+    Publisher="CN=DefaultCompany"
     Version="1.1.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="f0dce247-839b-462d-94ab-74963e55f455" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>let-me-use-my-accent-colors</DisplayName>
-    <PublisherDisplayName>bakge</PublisherDisplayName>
+    <PublisherDisplayName>DefaultCompany</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -57,9 +57,4 @@
       </uap:VisualElements>
     </Application>
   </Applications>
-  
-  <Capabilities>
-    <uap:Capability Name="removableStorage"/>
-	<rescap:Capability Name="broadFileSystemAccess" />
-   </Capabilities>
 </Package>
