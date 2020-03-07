@@ -11,12 +11,11 @@ namespace let_me_use_my_accent_colors
     public sealed partial class MainPage : Page
     {
         public string[] arrayOfFirstPartyAppNames = CStart.firstPartyApps.Select(x => x.name).ToArray();
-        public string[] tileSizes = new[] { "Default (150x150)", "Wide (310x150)" };
+        public string[] tileSizes = new[] { "Default (150x150)", "Wide (310x150)" }; // def * 1.35
 
         public MainPage()
         {
             App.dontExit = true;
-
             this.InitializeComponent();
         }
 
