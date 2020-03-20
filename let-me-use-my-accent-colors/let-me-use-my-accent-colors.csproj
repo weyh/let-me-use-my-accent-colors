@@ -119,7 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CustomUriPage.xaml.cs">
+    <Compile Include="Pages\CustomUriPage\CustomUriPage.xaml.cs">
       <DependentUpon>CustomUriPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
@@ -331,7 +331,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Pages\CustomUriPage.xaml">
+    <Page Include="Pages\CustomUriPage\CustomUriPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
