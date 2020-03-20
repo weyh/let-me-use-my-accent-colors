@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,8 +11,7 @@ namespace let_me_use_my_accent_colors
 {
     class CStart
     {
-        public static List<FirstPartyApp> firstPartyApps;
-        //public static List<SecondaryTile> secondaryTiles = new List<SecondaryTile>();
+        public static List<CApp> cApps { get; private set; }
 
         /// <summary>
         /// Starts app
@@ -19,10 +19,10 @@ namespace let_me_use_my_accent_colors
         /// <param name="uriName">The name associated with the uri</param>
         public async static void Applicion(string uriName)
         {
-            if (firstPartyApps.Contains(uriName))
-                await Launcher.LaunchUriAsync(new Uri(firstPartyApps.Find(x => x.name == uriName).appURI));
+            if (cApps.Contains(uriName))
+                await Launcher.LaunchUriAsync(new Uri(cApps.Find(x => x.name == uriName).appURI));
             else
-                Debug.Fail($"FirstPartyAppURIs.ContainsKey({uriName})");
+                Debug.WriteLine($"FirstPartyAppURIs.ContainsKey({uriName})");
         }
 
         /// <summary>
@@ -33,34 +33,32 @@ namespace let_me_use_my_accent_colors
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Resources/uri_dict.txt"));
             var dict = await FileIO.ReadLinesAsync(file);
 
-            firstPartyApps = dict.Select(x => new FirstPartyApp(x.Split(',')[0], x.Split(',')[1])).ToList();
+            cApps = dict.Select(x => new CApp(x.Split(',')[0], x.Split(',')[1])).ToList();
         }
 
-        /*public async static void LoadSavedTiles()
+        public async static void LoadCustomApps()
         {
             try
             {
-                StorageFile file = await ApplicationData.Current.LocalCacheFolder.GetFileAsync("tiles.json");
+                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync("customApps.json");
                 string json = await FileIO.ReadTextAsync(file);
 
-                secondaryTiles = JsonConvert.DeserializeObject<List<SecondaryTile>>(json);
+                cApps.AddRange(JsonConvert.DeserializeObject<List<CApp>>(json));
             }
             catch
             {
-                Debug.Fail("Read fialed");
+                Debug.WriteLine("Read fialed");
             }
         }
 
-        public async static void SaveTile(SecondaryTile tile)
+        public async static void AddCustomApps(CApp customApp)
         {
-            secondaryTiles.Add(tile);
-            string json = JsonConvert.SerializeObject(secondaryTiles, Formatting.None);
+            cApps.Add(customApp);
+            string json = JsonConvert.SerializeObject(cApps.Where(x => !x.firstPartyApp), Formatting.None);
 
-            StorageFile file = await ApplicationData.Current.LocalCacheFolder.CreateFileAsync("tiles.json",
-                CreationCollisionOption.ReplaceExisting);
-
-            _ = FileIO.WriteTextAsync(file, json);
-        }*/
+            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("customApps.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(file, json);
+        }
 
         public async static void SuspendAsync()
         {
@@ -69,11 +67,11 @@ namespace let_me_use_my_accent_colors
             await resourceInfos[0].StartSuspendAsync();
         }
 
-        public async static void ResumeAsync()
-        {
-            IList<AppDiagnosticInfo> infos = await AppDiagnosticInfo.RequestInfoForAppAsync();
-            IList<AppResourceGroupInfo> resourceInfos = infos[0].GetResourceGroups();
-            await resourceInfos[0].StartResumeAsync();
-        }
+        //public async static void ResumeAsync()
+        //{
+        //    IList<AppDiagnosticInfo> infos = await AppDiagnosticInfo.RequestInfoForAppAsync();
+        //    IList<AppResourceGroupInfo> resourceInfos = infos[0].GetResourceGroups();
+        //    await resourceInfos[0].StartResumeAsync();
+        //}
     }
 }

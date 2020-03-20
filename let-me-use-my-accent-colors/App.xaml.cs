@@ -24,6 +24,7 @@ namespace let_me_use_my_accent_colors
         public App()
         {
             CStart.LoadFirstPartyAppURIs();
+            CStart.LoadCustomApps();
 
             this.InitializeComponent();
             this.Suspending += OnSuspending;
