@@ -5,11 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
-using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -21,11 +19,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace let_me_use_my_accent_colors
 {
-    public sealed partial class CustomUriPage : Page
+    public sealed partial class EditCustomUriPage : Page
     {
+        private CApp cApp = new CApp();
         private Dictionary<string, StorageFile> imgs = new Dictionary<string, StorageFile>();
 
-        public CustomUriPage()
+        public EditCustomUriPage()
         {
             var currentView = SystemNavigationManager.GetForCurrentView();
             currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
@@ -37,8 +36,20 @@ namespace let_me_use_my_accent_colors
             };
 
             this.InitializeComponent();
-
             DefStoryboard.Begin();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            cApp = (CApp)e.Parameter;
+
+            Wide310x150_TextBox.Text = cApp.GetWide310x150(false).OriginalString;
+            Square150x150_TextBox.Text = cApp.GetSquare150x150(false).OriginalString;
+            Square310x310_TextBox.Text = cApp.GetSquare310x310(false).OriginalString;
+            Square44x44_TextBox.Text = cApp.GetSquare44x44(false).OriginalString;
+            Square71x71_TextBox.Text = cApp.GetSquare71x71(false).OriginalString;
         }
 
         private async void Browse(object sender, RoutedEventArgs e)
@@ -54,7 +65,7 @@ namespace let_me_use_my_accent_colors
             StorageFile file = await picker.PickSingleFileAsync();
             if (file != null)
             {
-                if(imgs.ContainsKey(((Button)sender).Name.Replace("_Button", "")))
+                if (imgs.ContainsKey(((Button)sender).Name.Replace("_Button", "")))
                     imgs.Remove(((Button)sender).Name.Replace("_Button", ""));
 
                 imgs.Add(((Button)sender).Name.Replace("_Button", ""), file);
@@ -64,33 +75,31 @@ namespace let_me_use_my_accent_colors
                 Debug.WriteLine("Img error");
         }
 
-        private async void Add_Button_Click(object sender, RoutedEventArgs e)
+        private async void Save_Button_Click(object sender, RoutedEventArgs e)
         {
-            Added_Popup.IsOpen = true;
+            Saved_Popup.IsOpen = true;
 
             Stopwatch sw = new Stopwatch();
             EnterStoryboard.Begin();
             sw.Start();
 
-           CApp ca = new CApp(DisplayName_TextBox.Text, CustomUri_TextBox.Text, false);
+            CApp ca = new CApp(DisplayName_TextBox.Text, CustomUri_TextBox.Text, false);
 
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             foreach (var img in imgs)
-            {
                 await img.Value.CopyAsync(localFolder, $"{ca.name}_{img.Key}.png", NameCollisionOption.ReplaceExisting);
-            }
 
-            CStart.AddCustomApps(ca);
+            CStart.EditCustomApps(ca);
             sw.Stop();
             Debug.WriteLine("DONE" + localFolder.Path);
 
-            if(sw.ElapsedMilliseconds < 2500)
+            if (sw.ElapsedMilliseconds < 2500)
                 await Task.Delay(2500 - (int)sw.ElapsedMilliseconds);
 
             ExitStoryboard.Begin();
             await Task.Delay(1000);
 
-            Added_Popup.IsOpen = false;
+            Saved_Popup.IsOpen = false;
         }
     }
 }

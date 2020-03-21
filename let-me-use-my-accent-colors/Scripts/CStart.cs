@@ -51,9 +51,31 @@ namespace let_me_use_my_accent_colors
             }
         }
 
-        public async static void AddCustomApps(CApp customApp)
+        public static void AddCustomApps(CApp customApp)
         {
             cApps.Add(customApp);
+            SaveCustomApps();
+        }
+
+        public static void RemoveCustomApps(CApp customApp)
+        {
+            cApps.Remove(customApp);
+            SaveCustomApps();
+        }
+
+        public static void EditCustomApps(CApp customApp)
+        {
+            int i = cApps.IndexOf(cApps.FindByName(customApp.name));
+
+            if (cApps[i].appURI == customApp.appURI) // only the appUri can be changed
+                return;
+
+            cApps[i] = customApp;
+            SaveCustomApps();
+        }
+
+        public async static void SaveCustomApps()
+        {
             string json = JsonConvert.SerializeObject(cApps.Where(x => !x.firstPartyApp), Formatting.None);
 
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("customApps.json", CreationCollisionOption.ReplaceExisting);

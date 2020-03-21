@@ -61,7 +61,7 @@ namespace let_me_use_my_accent_colors
 
         private void CreateCustomUri(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(CustomUriPage));
+            this.Frame.Navigate(typeof(CustomUriListViewPage));
         }
     }
 }

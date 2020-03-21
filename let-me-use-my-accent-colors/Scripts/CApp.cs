@@ -11,6 +11,8 @@ namespace let_me_use_my_accent_colors
 
         public bool firstPartyApp;
 
+        public Uri Thumbnail => GetSquare71x71(true);
+
         public Uri GetWide310x150(bool useLegacy)
         {
             if(!firstPartyApp)
