@@ -20,24 +20,13 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image x:Name="Image"
-                        Grid.RowSpan="2"
-                        Width ="32"
-                        Height="32"
-                        Margin="6"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Source="{Binding Thumbnail}"/>
-                    <TextBlock Grid.Column="1"
+                    <TextBlock
+                        Grid.Row="0"
                         Text="{x:Bind name}"
                         x:Phase="1"
                         Style="{ThemeResource BaseTextBlockStyle}"
                         Margin="12,6,0,0"/>
-                    <TextBlock  Grid.Column="1"
+                    <TextBlock
                         Grid.Row="1"
                         Text="{x:Bind appURI}"
                         x:Phase="2"

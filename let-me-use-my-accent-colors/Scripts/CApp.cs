@@ -11,8 +11,6 @@ namespace let_me_use_my_accent_colors
 
         public bool firstPartyApp;
 
-        public Uri Thumbnail => GetSquare71x71(true);
-
         public Uri GetWide310x150(bool useLegacy)
         {
             if(!firstPartyApp)
@@ -40,7 +38,7 @@ namespace let_me_use_my_accent_colors
         public Uri GetSquare310x310(bool useLegacy)
         {
             if (!firstPartyApp)
-                return new Uri($"ms-appdata:///local/{name}_LargeTile.scale-100.png");
+                return new Uri($"ms-appdata:///local/{name}_LargeTile.png");
 
             if (useLegacy)
                 return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/l/LargeTile.scale-100.png");
@@ -51,7 +49,7 @@ namespace let_me_use_my_accent_colors
         public Uri GetSquare71x71(bool useLegacy)
         {
             if (!firstPartyApp)
-                return new Uri($"ms-appdata:///local/{name}_SmallTile.scale-100.png");
+                return new Uri($"ms-appdata:///local/{name}_SmallTile.png");
 
             if (useLegacy)
                 return new Uri($"ms-appx:///Resources/Imgs/{name.Replace("&", "And")}/l/SmallTile.scale-100.png");

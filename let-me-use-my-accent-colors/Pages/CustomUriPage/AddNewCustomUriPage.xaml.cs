@@ -27,15 +27,6 @@ namespace let_me_use_my_accent_colors
 
         public AddNewCustomUriPage()
         {
-            var currentView = SystemNavigationManager.GetForCurrentView();
-            currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-
-            currentView.BackRequested += (s, e) =>
-            {
-                if (this.Frame.CanGoBack)
-                    this.Frame.GoBack();
-            };
-
             this.InitializeComponent();
             DefStoryboard.Begin();
         }
@@ -65,6 +56,8 @@ namespace let_me_use_my_accent_colors
 
         private async void Add_Button_Click(object sender, RoutedEventArgs e)
         {
+            Added_Popup.VerticalOffset = -((FrameworkElement)Added_Popup.Child).ActualHeight / 2;
+            Added_Popup.HorizontalOffset = -((FrameworkElement)Added_Popup.Child).ActualWidth / 2;
             Added_Popup.IsOpen = true;
 
             Stopwatch sw = new Stopwatch();
@@ -87,7 +80,7 @@ namespace let_me_use_my_accent_colors
             ExitStoryboard.Begin();
             await Task.Delay(1000);
 
-            Added_Popup.IsOpen = false;
+            this.Frame.Navigate(typeof(CustomUriListViewPage));
         }
     }
 }

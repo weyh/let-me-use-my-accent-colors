@@ -7,8 +7,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     mc:Ignorable="d" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+    <Page.Resources>
+        <Storyboard x:Name="EnterStoryboard">
+            <FadeInThemeAnimation Storyboard.TargetName="Added_Popup" SpeedRatio="0.3" />
+        </Storyboard>
+        <Storyboard x:Name="ExitStoryboard">
+            <FadeOutThemeAnimation Storyboard.TargetName="Added_Popup" SpeedRatio="0.3" />
+        </Storyboard>
+        <Storyboard x:Name="DefStoryboard">
+            <FadeOutThemeAnimation Storyboard.TargetName="Added_Popup" SpeedRatio="3" />
+        </Storyboard>
+    </Page.Resources>
 
     <Grid Padding="0 28 0 0">
+        <Popup Name="Added_Popup" IsOpen="False" IsLightDismissEnabled="True" LightDismissOverlayMode="On" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Added" FontSize="26" />
+        </Popup>
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="7">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -73,8 +87,8 @@
                         <ColumnDefinition Width="130"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Name="Square310x310_TextBox" Grid.Column="0" PlaceholderText="C:\" />
-                    <Button Name="Square310x310_Button" Grid.Column="1" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Content="Browse" Click="Browse" />
+                    <TextBox Name="LargeTile_TextBox" Grid.Column="0" PlaceholderText="C:\" />
+                    <Button Name="LargeTile_Button" Grid.Column="1" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Content="Browse" Click="Browse" />
                 </Grid>
             </Grid>
             <Grid>
@@ -89,8 +103,8 @@
                         <ColumnDefinition Width="130"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Name="Square71x71_TextBox" Grid.Column="0" PlaceholderText="C:\" />
-                    <Button Name="Square71x71_Button" Grid.Column="1" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Content="Browse" Click="Browse" />
+                    <TextBox Name="SmallTile_TextBox" Grid.Column="0" PlaceholderText="C:\" />
+                    <Button Name="SmallTile_Button" Grid.Column="1" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Content="Browse" Click="Browse" />
                 </Grid>
             </Grid>
             <Grid>
@@ -113,26 +127,7 @@
                 <TextBlock FontSize="11" Text="Note: Images will be copied to the application directory!"/>
             </Grid>
             <Grid Margin="0 19 0 0">
-                <Grid.Resources>
-                    <Storyboard x:Name="EnterStoryboard">
-                        <FadeInThemeAnimation Storyboard.TargetName="Added_Popup" SpeedRatio="0.3" />
-                    </Storyboard>
-                    <Storyboard x:Name="ExitStoryboard">
-                        <FadeOutThemeAnimation Storyboard.TargetName="Added_Popup" SpeedRatio="0.3" />
-                    </Storyboard>
-                    <Storyboard x:Name="DefStoryboard">
-                        <FadeOutThemeAnimation Storyboard.TargetName="Added_Popup" SpeedRatio="3" />
-                    </Storyboard>
-                </Grid.Resources>
-
                 <Button Name="Add_Button" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Click="Add_Button_Click" Content="Add" />
-                <Popup Name="Added_Popup" IsOpen="False" IsLightDismissEnabled="True" LightDismissOverlayMode="On" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalOffset="-450" VerticalOffset="-150">
-                    <Border Width="900" Height="200">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="Added" FontSize="26" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-                </Popup>
             </Grid>
         </StackPanel>
     </Grid>

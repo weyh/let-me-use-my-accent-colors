@@ -28,6 +28,7 @@ namespace let_me_use_my_accent_colors
             coreTitleBar.ExtendViewIntoTitleBar = true;
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Disabled;
+            Debug.WriteLine(ApplicationData.Current.LocalFolder.Path);
         }
 
         public async void PinSecondaryTile()
@@ -44,10 +45,10 @@ namespace let_me_use_my_accent_colors
             SecondaryTile tile = new SecondaryTile(tileId, displayName, arguments,
                 CStart.cApps.FindByName(displayName).GetSquare150x150(useLegacyIcons), tileSize);
 
-            tile.VisualElements.Wide310x150Logo = CStart.cApps.FindByName(displayName).GetWide310x150(useLegacyIcons);
-            tile.VisualElements.Square310x310Logo = CStart.cApps.FindByName(displayName).GetSquare310x310(useLegacyIcons);
-            tile.VisualElements.Square71x71Logo = CStart.cApps.FindByName(displayName).GetSquare71x71(useLegacyIcons);
-            tile.VisualElements.Square44x44Logo = CStart.cApps.FindByName(displayName).GetSquare44x44(useLegacyIcons);
+            tile.VisualElements.Wide310x150Logo = CStart.cApps.FindByName(uriName).GetWide310x150(useLegacyIcons);
+            tile.VisualElements.Square310x310Logo = CStart.cApps.FindByName(uriName).GetSquare310x310(useLegacyIcons);
+            tile.VisualElements.Square71x71Logo = CStart.cApps.FindByName(uriName).GetSquare71x71(useLegacyIcons);
+            tile.VisualElements.Square44x44Logo = CStart.cApps.FindByName(uriName).GetSquare44x44(useLegacyIcons);
 
             tile.VisualElements.ShowNameOnSquare150x150Logo = (bool)Show150x150_CheckBox.IsChecked;
             tile.VisualElements.ShowNameOnWide310x150Logo = (bool)Show310x150_CheckBox.IsChecked;
@@ -59,9 +60,6 @@ namespace let_me_use_my_accent_colors
 
         private void Create(object sender, RoutedEventArgs e) => PinSecondaryTile();
 
-        private void CreateCustomUri(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(CustomUriListViewPage));
-        }
+        private void CreateCustomUri(object sender, RoutedEventArgs e) => this.Frame.Navigate(typeof(CustomUriListViewPage));
     }
 }

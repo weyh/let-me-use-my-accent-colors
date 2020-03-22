@@ -26,15 +26,6 @@ namespace let_me_use_my_accent_colors
 
         public EditCustomUriPage()
         {
-            var currentView = SystemNavigationManager.GetForCurrentView();
-            currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-
-            currentView.BackRequested += (s, e) =>
-            {
-                if (this.Frame.CanGoBack)
-                    this.Frame.GoBack();
-            };
-
             this.InitializeComponent();
             DefStoryboard.Begin();
         }
@@ -47,9 +38,9 @@ namespace let_me_use_my_accent_colors
 
             Wide310x150_TextBox.Text = cApp.GetWide310x150(false).OriginalString;
             Square150x150_TextBox.Text = cApp.GetSquare150x150(false).OriginalString;
-            Square310x310_TextBox.Text = cApp.GetSquare310x310(false).OriginalString;
+            LargeTile_TextBox.Text = cApp.GetSquare310x310(false).OriginalString;
             Square44x44_TextBox.Text = cApp.GetSquare44x44(false).OriginalString;
-            Square71x71_TextBox.Text = cApp.GetSquare71x71(false).OriginalString;
+            SmallTile_TextBox.Text = cApp.GetSquare71x71(false).OriginalString;
         }
 
         private async void Browse(object sender, RoutedEventArgs e)
@@ -77,13 +68,16 @@ namespace let_me_use_my_accent_colors
 
         private async void Save_Button_Click(object sender, RoutedEventArgs e)
         {
+            Saved_Popup.VerticalOffset = -((FrameworkElement)Saved_Popup.Child).ActualHeight / 2;
+            Saved_Popup.HorizontalOffset = -((FrameworkElement)Saved_Popup.Child).ActualWidth / 2;
             Saved_Popup.IsOpen = true;
 
             Stopwatch sw = new Stopwatch();
+
             EnterStoryboard.Begin();
             sw.Start();
 
-            CApp ca = new CApp(DisplayName_TextBox.Text, CustomUri_TextBox.Text, false);
+            CApp ca = new CApp(cApp.name, CustomUri_TextBox.Text, false);
 
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             foreach (var img in imgs)
@@ -91,15 +85,14 @@ namespace let_me_use_my_accent_colors
 
             CStart.EditCustomApps(ca);
             sw.Stop();
-            Debug.WriteLine("DONE" + localFolder.Path);
 
             if (sw.ElapsedMilliseconds < 2500)
                 await Task.Delay(2500 - (int)sw.ElapsedMilliseconds);
-
+            await Task.Delay(2500);
             ExitStoryboard.Begin();
             await Task.Delay(1000);
 
-            Saved_Popup.IsOpen = false;
+            this.Frame.Navigate(typeof(CustomUriListViewPage));
         }
     }
 }
