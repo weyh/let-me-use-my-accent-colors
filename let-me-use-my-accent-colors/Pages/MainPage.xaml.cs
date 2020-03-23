@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
@@ -43,7 +41,7 @@ namespace let_me_use_my_accent_colors
             bool useLegacyIcons = (bool)UseLegacyIcons.IsChecked;
 
             SecondaryTile tile = new SecondaryTile(tileId, displayName, arguments,
-                CStart.cApps.FindByName(displayName).GetSquare150x150(useLegacyIcons), tileSize);
+                CStart.cApps.FindByName(uriName).GetSquare150x150(useLegacyIcons), tileSize);
 
             tile.VisualElements.Wide310x150Logo = CStart.cApps.FindByName(uriName).GetWide310x150(useLegacyIcons);
             tile.VisualElements.Square310x310Logo = CStart.cApps.FindByName(uriName).GetSquare310x310(useLegacyIcons);

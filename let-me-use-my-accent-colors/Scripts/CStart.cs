@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Linq;
 using Windows.Storage;
 using Windows.System;
-using Windows.UI.StartScreen;
 
 namespace let_me_use_my_accent_colors
 {
