@@ -1,0 +1,131 @@
+﻿<Page
+    x:Class="let_me_use_my_accent_colors.EditCustomUriPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:let_me_use_my_accent_colors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+    <Page.Resources>
+        <Storyboard x:Name="EnterStoryboard">
+            <FadeInThemeAnimation Storyboard.TargetName="Saved_Popup" SpeedRatio="0.3" />
+        </Storyboard>
+        <Storyboard x:Name="ExitStoryboard">
+            <FadeOutThemeAnimation Storyboard.TargetName="Saved_Popup" SpeedRatio="0.3" />
+        </Storyboard>
+        <Storyboard x:Name="DefStoryboard">
+            <FadeOutThemeAnimation Storyboard.TargetName="Saved_Popup" SpeedRatio="3" />
+        </Storyboard>
+    </Page.Resources>
+
+    <Grid Padding="0 28 0 0">
+        <Popup Name="Saved_Popup" IsOpen="False" IsLightDismissEnabled="True" LightDismissOverlayMode="On" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Name="Saved_TextBlock" Text="Saved" FontSize="26" />
+        </Popup>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="7">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="500"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="App Name:" FontSize="16" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Text="{x:Bind cApp.name}" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="500"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Uri:" FontSize="16" VerticalAlignment="Center"/>
+                <TextBox Name="CustomUri_TextBox" Grid.Column="1" PlaceholderText="spotify://" Text="{x:Bind cApp.appURI}"/>
+            </Grid>
+            <Grid Padding="0 20 0 0">
+                <TextBlock Text="Images:" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="500"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Wide 310x150:" FontSize="16" VerticalAlignment="Center"/>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="130"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Name="Wide310x150_TextBox" Grid.Column="0" PlaceholderText="C:\" />
+                    <Button Name="Wide310x150_Button" Grid.Column="1" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Content="Browse" Click="Browse" />
+                </Grid>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="500"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Square 150x150:" FontSize="16" VerticalAlignment="Center"/>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="130"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Name="Square150x150_TextBox" Grid.Column="0" PlaceholderText="C:\" />
+                    <Button Name="Square150x150_Button" Grid.Column="1" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Content="Browse" Click="Browse" />
+                </Grid>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="500"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Square 310x310:" FontSize="16" VerticalAlignment="Center"/>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="130"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Name="LargeTile_TextBox" Grid.Column="0" PlaceholderText="C:\" />
+                    <Button Name="LargeTile_Button" Grid.Column="1" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Content="Browse" Click="Browse" />
+                </Grid>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="500"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Square 71x71:" FontSize="16" VerticalAlignment="Center"/>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="130"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Name="SmallTile_TextBox" Grid.Column="0" PlaceholderText="C:\" />
+                    <Button Name="SmallTile_Button" Grid.Column="1" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Content="Browse" Click="Browse" />
+                </Grid>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="500"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Square 44x44:" FontSize="16" VerticalAlignment="Center"/>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="130"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Name="Square44x44_TextBox" Grid.Column="0" PlaceholderText="C:\" />
+                    <Button Name="Square44x44_Button" Grid.Column="1" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Content="Browse" Click="Browse" />
+                </Grid>
+            </Grid>
+            <Grid Margin="0 30 0 0">
+                <Button Name="Save_Button" HorizontalAlignment="Right" BorderThickness="2" Width="125" FontSize="15" Click="Save_Button_Click" Content="Save" />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>
