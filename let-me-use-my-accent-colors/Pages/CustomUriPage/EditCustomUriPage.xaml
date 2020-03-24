@@ -30,7 +30,7 @@
                     <ColumnDefinition Width="500"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="App Name:" FontSize="16" VerticalAlignment="Center"/>
-                <TextBox Name="DisplayName_TextBox" Grid.Column="1" Text="{x:Bind cApp.name}" IsReadOnly="True" />
+                <TextBlock Grid.Column="1" Text="{x:Bind cApp.name}" />
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>

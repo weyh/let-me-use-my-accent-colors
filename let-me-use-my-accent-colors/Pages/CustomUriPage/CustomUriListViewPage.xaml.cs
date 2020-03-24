@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Storage;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -15,15 +14,6 @@ namespace let_me_use_my_accent_colors
 
         public CustomUriListViewPage()
         {
-            var currentView = SystemNavigationManager.GetForCurrentView();
-            currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-
-            currentView.BackRequested += (s, e) =>
-            {
-                if (this.Frame.CanGoBack)
-                    this.Frame.GoBack();
-            };
-
             this.InitializeComponent();
         }
 
@@ -45,7 +35,6 @@ namespace let_me_use_my_accent_colors
             if (!CStart.cApps.FindByName(name).firstPartyApp)
             {
                 CApp app = arrayOfCApps.FindByName(name);
-                // tile may also needs to be deleted
 
                 await (await StorageFile.GetFileFromApplicationUriAsync(app.GetWide310x150(false))).DeleteAsync();
                 await (await StorageFile.GetFileFromApplicationUriAsync(app.GetSquare150x150(false))).DeleteAsync();
