@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.UI.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace let_me_use_my_accent_colors
@@ -58,8 +61,11 @@ namespace let_me_use_my_accent_colors
 
         private async void Save_Button_Click(object sender, RoutedEventArgs e)
         {
-            Saved_Popup.VerticalOffset = -((FrameworkElement)Saved_Popup.Child).ActualHeight / 2;
-            Saved_Popup.HorizontalOffset = -((FrameworkElement)Saved_Popup.Child).ActualWidth / 2;
+            if (!IsFormValid())
+                return;
+
+            Saved_Popup.VerticalOffset =- ((FrameworkElement)Saved_Popup.Child).ActualHeight / 2;
+            Saved_Popup.HorizontalOffset =- ((FrameworkElement)Saved_Popup.Child).ActualWidth / 2;
             Saved_Popup.IsOpen = true;
 
             Stopwatch sw = new Stopwatch();
@@ -83,6 +89,21 @@ namespace let_me_use_my_accent_colors
             await Task.Delay(1000);
 
             this.Frame.Navigate(typeof(CustomUriListViewPage));
+        }
+
+        private bool IsFormValid()
+        {
+            CustomUri_TextBox_LostFocus(null, null);
+
+            return TextBoxRegex.GetIsValid(CustomUri_TextBox);
+        }
+
+        private void CustomUri_TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!TextBoxRegex.GetIsValid(CustomUri_TextBox))
+                CustomUri_TextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            else
+                CustomUri_TextBox.ClearValue(BorderBrushProperty);
         }
     }
 }

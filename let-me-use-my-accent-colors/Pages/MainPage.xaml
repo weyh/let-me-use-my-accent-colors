@@ -5,6 +5,7 @@
     xmlns:local="using:let_me_use_my_accent_colors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     mc:Ignorable="d"
     BorderThickness="0" HorizontalAlignment="Stretch"
     VerticalAlignment="Stretch" FontSize="12" RequestedTheme="Default">
@@ -17,7 +18,7 @@
                     <ColumnDefinition Width="500"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Display Name:" FontSize="16" VerticalAlignment="Center"/>
-                <TextBox Name="DisplayName_TextBox" Grid.Column="1" PlaceholderText="Enter text here..." />
+                <TextBox Name="DisplayName_TextBox" Grid.Column="1" PlaceholderText="Enter text here..." extensions:TextBoxRegex.Regex="^(?!\s*$).+" LostFocus="DisplayName_TextBox_LostFocus" />
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -25,7 +26,7 @@
                     <ColumnDefinition Width="500"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="App URIs:" FontSize="16" VerticalAlignment="Center"/>
-                <ComboBox Name="URI_ComboBox" IsEditable="True" Grid.Column="1" ItemsSource="{x:Bind arrayOfCApps}" HorizontalAlignment="Stretch" />
+                <ComboBox Name="URI_ComboBox" IsEditable="True" Grid.Column="1" ItemsSource="{x:Bind arrayOfCApps}" HorizontalAlignment="Stretch" LostFocus="URI_ComboBox_LostFocus" />
             </Grid>
             <Grid Margin="0 0 0 17">
                 <Grid.ColumnDefinitions>

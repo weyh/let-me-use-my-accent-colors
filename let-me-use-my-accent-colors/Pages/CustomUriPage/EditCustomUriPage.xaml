@@ -5,6 +5,7 @@
     xmlns:local="using:let_me_use_my_accent_colors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAcrylicWindowBrush}">
     <Page.Resources>
@@ -38,7 +39,7 @@
                     <ColumnDefinition Width="500"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Uri:" FontSize="16" VerticalAlignment="Center"/>
-                <TextBox Name="CustomUri_TextBox" Grid.Column="1" PlaceholderText="spotify://" Text="{x:Bind cApp.appURI}"/>
+                <TextBox Name="CustomUri_TextBox" Grid.Column="1" PlaceholderText="spotify://" Text="{x:Bind cApp.appURI}" extensions:TextBoxRegex.Regex="(^(?!\s*$).+)[\:][\/][\/]" LostFocus="CustomUri_TextBox_LostFocus" />
             </Grid>
             <Grid Padding="0 20 0 0">
                 <TextBlock Text="Images:" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>

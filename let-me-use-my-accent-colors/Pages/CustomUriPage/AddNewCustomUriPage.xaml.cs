@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.UI.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace let_me_use_my_accent_colors
 {
@@ -43,8 +46,11 @@ namespace let_me_use_my_accent_colors
 
         private async void Add_Button_Click(object sender, RoutedEventArgs e)
         {
-            Added_Popup.VerticalOffset = -((FrameworkElement)Added_Popup.Child).ActualHeight / 2;
-            Added_Popup.HorizontalOffset = -((FrameworkElement)Added_Popup.Child).ActualWidth / 2;
+            if (!IsFormValid())
+                return;
+
+            Added_Popup.VerticalOffset =- ((FrameworkElement)Added_Popup.Child).ActualHeight / 2;
+            Added_Popup.HorizontalOffset =- ((FrameworkElement)Added_Popup.Child).ActualWidth / 2;
             Added_Popup.IsOpen = true;
 
             Stopwatch sw = new Stopwatch();
@@ -68,6 +74,30 @@ namespace let_me_use_my_accent_colors
             await Task.Delay(1000);
 
             this.Frame.Navigate(typeof(CustomUriListViewPage));
+        }
+
+        private bool IsFormValid()
+        {
+            DisplayName_TextBox_LostFocus(null, null);
+            CustomUri_TextBox_LostFocus(null, null);
+
+            return TextBoxRegex.GetIsValid(DisplayName_TextBox) && TextBoxRegex.GetIsValid(CustomUri_TextBox);
+        }
+
+        private void DisplayName_TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!TextBoxRegex.GetIsValid(DisplayName_TextBox))
+                DisplayName_TextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            else
+                DisplayName_TextBox.ClearValue(BorderBrushProperty);
+        }
+
+        private void CustomUri_TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!TextBoxRegex.GetIsValid(CustomUri_TextBox))
+                CustomUri_TextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            else
+                CustomUri_TextBox.ClearValue(BorderBrushProperty);
         }
     }
 }

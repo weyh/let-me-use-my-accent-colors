@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.UI.Extensions;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
+using Windows.UI;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace let_me_use_my_accent_colors
 {
@@ -29,6 +32,9 @@ namespace let_me_use_my_accent_colors
 
         public async void PinSecondaryTile()
         {
+            if (!IsFormValid())
+                return;
+
             string tileId = Package.Current.DisplayName + DateTime.UtcNow.Ticks;
             string displayName = DisplayName_TextBox.Text;
 
@@ -52,6 +58,30 @@ namespace let_me_use_my_accent_colors
 
             if (!SecondaryTile.Exists(tileId))
                 await tile.RequestCreateAsync();
+        }
+
+        private bool IsFormValid()
+        {
+            DisplayName_TextBox_LostFocus(null, null);
+            URI_ComboBox_LostFocus(null, null);
+
+            return TextBoxRegex.GetIsValid(DisplayName_TextBox) && TileSize_ComboBox.Text != "";
+        }
+
+        private void DisplayName_TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!TextBoxRegex.GetIsValid(DisplayName_TextBox))
+                DisplayName_TextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            else
+                DisplayName_TextBox.ClearValue(BorderBrushProperty);
+        }
+
+        private void URI_ComboBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (URI_ComboBox.Text == "")
+                URI_ComboBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            else
+                URI_ComboBox.ClearValue(BorderBrushProperty);
         }
 
         private void Create(object sender, RoutedEventArgs e) => PinSecondaryTile();
