@@ -78,6 +78,11 @@ namespace let_me_use_my_accent_colors
 
         private void URI_ComboBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            if (CStart.cApps.FindByName(URI_ComboBox.Text).firstPartyApp)
+                UseLegacyIcons.IsEnabled = true;
+            else
+                UseLegacyIcons.IsEnabled = false;
+
             if (URI_ComboBox.Text == "")
                 URI_ComboBox.BorderBrush = new SolidColorBrush(Colors.Red);
             else
