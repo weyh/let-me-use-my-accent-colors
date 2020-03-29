@@ -21,7 +21,7 @@ namespace let_me_use_my_accent_colors
 
         public MainPage()
         {
-            App.dontExit = true;
+            App.isOpen = true;
             this.InitializeComponent();
 
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;

@@ -14,9 +14,9 @@ namespace let_me_use_my_accent_colors
     sealed partial class App : Application
     {
         /// <summary>
-        /// Don't exit from the app if it's already running when a tile is clicked
+        /// If false the app will be closed after a tile is clicked
         /// </summary>
-        public static bool dontExit = false;
+        public static bool isOpen = false;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -40,12 +40,12 @@ namespace let_me_use_my_accent_colors
         {
             if (e.Arguments.Contains("app="))
             {
-                if (!dontExit)
+                if (!isOpen)
                     CStart.SuspendAsync();
 
                 CStart.Applicion(e.Arguments.Replace("app=", ""));
 
-                if(!dontExit)
+                if(!isOpen)
                     Windows.UI.Xaml.Application.Current.Exit();
             }
 
@@ -61,10 +61,10 @@ namespace let_me_use_my_accent_colors
                 rootFrame.Navigated += OnNavigated;
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
+                //if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                //{
+                //    //TODO: Load state from previously suspended application
+                //}
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
